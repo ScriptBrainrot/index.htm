@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MasterGen - Générateur Top 1 FR</title>
+    <title>MASTERGEN - Comptes Premium Garanties</title>
     <style>
         * {
             margin: 0;
@@ -12,21 +12,85 @@
         }
 
         body {
-            font-family: 'Arial', sans-serif;
-            background: linear-gradient(-45deg, #ff6b6b, #4ecdc4, #45b7d1, #96ceb4, #ffa726);
-            background-size: 400% 400%;
-            animation: gradientShift 8s ease infinite;
-            min-height: 100vh;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #0f1419 0%, #1a2332 50%, #2a3441 100%);
+            color: white;
             overflow-x: hidden;
+            min-height: 100vh;
         }
 
-        @keyframes gradientShift {
-            0% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
-            100% { background-position: 0% 50%; }
+        /* Animation des étoiles en arrière-plan */
+        .stars {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        .star {
+            position: absolute;
+            width: 2px;
+            height: 2px;
+            background: white;
+            border-radius: 50%;
+            opacity: 0.8;
+            animation: twinkle 3s infinite ease-in-out;
+        }
+
+        .star:nth-child(odd) {
+            animation-delay: 1s;
+        }
+
+        .star.purple {
+            background: #a855f7;
+        }
+
+        .star.blue {
+            background: #3b82f6;
+        }
+
+        .star.cyan {
+            background: #06b6d4;
+        }
+
+        @keyframes twinkle {
+            0%, 100% { opacity: 0.3; transform: scale(1); }
+            50% { opacity: 1; transform: scale(1.5); }
+        }
+
+        /* Particules flottantes */
+        .floating-particles {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 2;
+        }
+
+        .particle {
+            position: absolute;
+            width: 4px;
+            height: 4px;
+            border-radius: 50%;
+            background: rgba(168, 85, 247, 0.6);
+            animation: float 6s infinite ease-in-out;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px) rotate(0deg); opacity: 0; }
+            25% { opacity: 1; }
+            50% { transform: translateY(-20px) rotate(180deg); opacity: 0.8; }
+            75% { opacity: 0.5; }
         }
 
         .container {
+            position: relative;
+            z-index: 10;
             max-width: 1200px;
             margin: 0 auto;
             padding: 20px;
@@ -34,520 +98,685 @@
 
         .header {
             text-align: center;
-            margin-bottom: 50px;
-            animation: fadeInDown 1s ease-out;
-        }
-
-        @keyframes fadeInDown {
-            from {
-                opacity: 0;
-                transform: translateY(-30px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
+            margin-bottom: 40px;
+            padding: 20px;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 15px;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
         }
 
         .logo {
-            font-size: 4rem;
-            font-weight: bold;
-            background: linear-gradient(45deg, #ff6b6b, #4ecdc4, #45b7d1);
-            background-size: 200% 200%;
-            -webkit-background-clip: text;
-            background-clip: text;
-            -webkit-text-fill-color: transparent;
-            animation: textGradient 3s ease infinite, bounce 2s ease-in-out infinite;
-            text-shadow: 0 0 30px rgba(255, 255, 255, 0.5);
-            border: 3px solid transparent;
-            border-radius: 20px;
-            padding: 20px;
-            backdrop-filter: blur(10px);
-            background-color: rgba(255, 255, 255, 0.1);
-        }
-
-        @keyframes textGradient {
-            0%, 100% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
-        }
-
-        @keyframes bounce {
-            0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
-            40% { transform: translateY(-10px); }
-            60% { transform: translateY(-5px); }
-        }
-
-        .subtitle {
-            font-size: 1.5rem;
-            color: white;
-            margin-top: 20px;
-            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
-            animation: pulse 2s ease-in-out infinite;
-        }
-
-        @keyframes pulse {
-            0%, 100% { opacity: 1; }
-            50% { opacity: 0.7; }
-        }
-
-        .main-content {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            min-height: 60vh;
-            animation: fadeIn 1.5s ease-out;
-        }
-
-        @keyframes fadeIn {
-            from { opacity: 0; }
-            to { opacity: 1; }
-        }
-
-        .generate-btn {
-            background: linear-gradient(45deg, #ff6b6b, #4ecdc4);
-            border: none;
-            padding: 25px 50px;
-            font-size: 1.8rem;
-            font-weight: bold;
-            color: white;
-            border-radius: 50px;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
-            border: 3px solid rgba(255, 255, 255, 0.3);
-            backdrop-filter: blur(10px);
-            position: relative;
-            overflow: hidden;
-        }
-
-        .generate-btn:before {
-            content: '';
-            position: absolute;
-            top: -50%;
-            left: -50%;
-            width: 200%;
-            height: 200%;
-            background: linear-gradient(45deg, transparent, rgba(255, 255, 255, 0.3), transparent);
-            transform: rotate(45deg);
-            transition: all 0.5s;
-            opacity: 0;
-        }
-
-        .generate-btn:hover {
-            transform: translateY(-5px) scale(1.05);
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
-            background: linear-gradient(45deg, #45b7d1, #96ceb4);
-        }
-
-        .generate-btn:hover:before {
-            animation: shine 0.7s ease;
-            opacity: 1;
-        }
-
-        @keyframes shine {
-            0% { left: -100%; }
-            100% { left: 100%; }
-        }
-
-        .generate-btn:active {
-            transform: translateY(0) scale(0.98);
-        }
-
-        .support-btn {
-            position: fixed;
-            bottom: 30px;
-            right: 30px;
-            background: linear-gradient(45deg, #ffa726, #ff6b6b);
-            border: none;
-            padding: 15px 25px;
-            font-size: 1.2rem;
-            font-weight: bold;
-            color: white;
-            border-radius: 30px;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
-            border: 2px solid rgba(255, 255, 255, 0.3);
-            animation: float 3s ease-in-out infinite;
-        }
-
-        @keyframes float {
-            0%, 100% { transform: translateY(0px); }
-            50% { transform: translateY(-10px); }
-        }
-
-        .support-btn:hover {
-            transform: scale(1.1);
-            box-shadow: 0 12px 35px rgba(0, 0, 0, 0.4);
-        }
-
-        .modal {
-            display: none;
-            position: fixed;
-            z-index: 1000;
-            left: 0;
-            top: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(0, 0, 0, 0.7);
-            backdrop-filter: blur(10px);
-            animation: fadeIn 0.3s ease;
-        }
-
-        .modal-content {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            margin: 5% auto;
-            padding: 40px;
-            border-radius: 25px;
-            width: 90%;
-            max-width: 500px;
-            text-align: center;
-            border: 3px solid rgba(255, 255, 255, 0.3);
-            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
-            animation: slideIn 0.5s ease;
-            position: relative;
-            overflow: hidden;
-        }
-
-        @keyframes slideIn {
-            from {
-                opacity: 0;
-                transform: translateY(-50px) scale(0.8);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0) scale(1);
-            }
-        }
-
-        .modal-content:before {
-            content: '';
-            position: absolute;
-            top: -50%;
-            left: -50%;
-            width: 200%;
-            height: 200%;
-            background: linear-gradient(45deg, transparent, rgba(255, 255, 255, 0.1), transparent);
-            animation: modalShine 2s linear infinite;
-        }
-
-        @keyframes modalShine {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
-        }
-
-        .modal h2 {
-            color: white;
             font-size: 2.5rem;
+            font-weight: bold;
             margin-bottom: 20px;
-            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
-            z-index: 1;
-            position: relative;
+            background: linear-gradient(45deg, #a855f7, #3b82f6, #06b6d4);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
         }
 
-        .modal p {
-            color: white;
-            font-size: 1.3rem;
-            margin-bottom: 30px;
+        .main-title {
+            font-size: 3rem;
+            font-weight: bold;
+            margin-bottom: 20px;
+            background: linear-gradient(45deg, #a855f7, #3b82f6, #06b6d4);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            text-align: center;
+        }
+
+        .sparkle {
+            display: inline-block;
+            font-size: 2rem;
+            animation: sparkle 2s infinite;
+        }
+
+        @keyframes sparkle {
+            0%, 100% { transform: scale(1) rotate(0deg); }
+            50% { transform: scale(1.2) rotate(180deg); }
+        }
+
+        .description {
+            font-size: 1.2rem;
             line-height: 1.6;
-            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
-            z-index: 1;
-            position: relative;
+            opacity: 0.9;
+            margin-bottom: 30px;
+        }
+
+        .discord-section {
+            background: rgba(88, 101, 242, 0.1);
+            border: 1px solid rgba(88, 101, 242, 0.3);
+            border-radius: 15px;
+            padding: 20px;
+            margin-bottom: 30px;
+            transition: all 0.3s ease;
+        }
+
+        .discord-section:hover {
+            background: rgba(88, 101, 242, 0.15);
+            transform: translateY(-5px);
+        }
+
+        .discord-title {
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+            color: #5865f2;
+            display: flex;
+            align-items: center;
+            gap: 10px;
         }
 
         .discord-link {
-            display: inline-block;
-            background: linear-gradient(45deg, #7289da, #5865f2);
+            background: rgba(88, 101, 242, 0.2);
+            border: 1px solid #5865f2;
+            border-radius: 8px;
+            padding: 10px 15px;
+            margin: 10px 0;
             color: white;
             text-decoration: none;
-            padding: 15px 30px;
-            border-radius: 25px;
-            font-weight: bold;
-            font-size: 1.1rem;
+            display: inline-block;
+            font-family: monospace;
             transition: all 0.3s ease;
-            border: 2px solid rgba(255, 255, 255, 0.3);
-            margin-bottom: 20px;
-            z-index: 1;
-            position: relative;
         }
 
         .discord-link:hover {
+            background: #5865f2;
             transform: scale(1.05);
-            box-shadow: 0 10px 30px rgba(114, 137, 218, 0.5);
         }
 
-        .close-btn {
-            background: linear-gradient(45deg, #e74c3c, #c0392b);
+        .copy-btn {
+            background: #5865f2;
             border: none;
+            border-radius: 6px;
+            padding: 8px 15px;
             color: white;
-            padding: 12px 25px;
-            border-radius: 20px;
+            margin-left: 10px;
             cursor: pointer;
-            font-size: 1rem;
-            font-weight: bold;
             transition: all 0.3s ease;
-            border: 2px solid rgba(255, 255, 255, 0.3);
-            z-index: 1;
-            position: relative;
         }
 
-        .close-btn:hover {
-            background: linear-gradient(45deg, #c0392b, #a93226);
-            transform: scale(1.05);
+        .copy-btn:hover {
+            background: #4752c4;
+            transform: scale(1.1);
         }
 
-        .support-modal-content {
-            background: linear-gradient(135deg, #2c3e50 0%, #34495e 100%);
+        .reminder {
+            background: rgba(251, 146, 60, 0.1);
+            border: 1px solid rgba(251, 146, 60, 0.3);
+            border-radius: 15px;
+            padding: 20px;
+            margin-bottom: 30px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            transition: all 0.3s ease;
         }
 
-        .admin-list {
-            margin-top: 30px;
-            z-index: 1;
-            position: relative;
+        .reminder:hover {
+            background: rgba(251, 146, 60, 0.15);
+            transform: translateY(-3px);
         }
 
-        .admin-list h3 {
-            color: #ecf0f1;
+        .star-icon {
+            font-size: 1.5rem;
+            color: #fb923c;
+        }
+
+        .admins-section {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 15px;
+            padding: 20px;
+            margin-bottom: 30px;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .section-title {
             font-size: 1.8rem;
             margin-bottom: 20px;
-            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+            color: #3b82f6;
+            display: flex;
+            align-items: center;
+            gap: 10px;
         }
 
-        .admin-item {
-            background: linear-gradient(45deg, #3498db, #2980b9);
-            color: white;
-            padding: 12px 20px;
-            margin: 10px 0;
-            border-radius: 15px;
-            font-weight: bold;
-            border: 2px solid rgba(255, 255, 255, 0.2);
+        .admins-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 15px;
+        }
+
+        .admin-card {
+            background: rgba(255, 255, 255, 0.08);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            border-radius: 12px;
+            padding: 15px;
             transition: all 0.3s ease;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
         }
 
-        .admin-item:hover {
-            transform: translateX(10px);
-            background: linear-gradient(45deg, #2980b9, #1abc9c);
-        }
-
-        .notification {
-            position: fixed;
-            bottom: 20px;
-            left: 50%;
-            transform: translateX(-50%);
-            background: linear-gradient(45deg, #27ae60, #2ecc71);
-            color: white;
-            padding: 15px 30px;
-            border-radius: 25px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
-            font-weight: bold;
-            z-index: 1001;
-            opacity: 0;
-            transition: all 0.5s ease;
-            border: 2px solid rgba(255, 255, 255, 0.3);
-        }
-
-        .notification.show {
-            opacity: 1;
-            animation: notificationSlide 0.5s ease;
-        }
-
-        @keyframes notificationSlide {
-            from {
-                opacity: 0;
-                transform: translateX(-50%) translateY(20px);
-            }
-            to {
-                opacity: 1;
-                transform: translateX(-50%) translateY(0);
-            }
-        }
-
-        .particles {
-            position: fixed;
+        .admin-card::before {
+            content: '';
+            position: absolute;
             top: 0;
-            left: 0;
+            left: -100%;
             width: 100%;
             height: 100%;
-            pointer-events: none;
-            z-index: -1;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+            transition: left 0.5s;
         }
 
-        .particle {
-            position: absolute;
-            background: white;
-            border-radius: 50%;
-            animation: float-particle 6s linear infinite;
+        .admin-card:hover::before {
+            left: 100%;
+        }
+
+        .admin-card:hover {
+            background: rgba(255, 255, 255, 0.12);
+            transform: translateY(-5px) scale(1.02);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+        }
+
+        .admin-name {
+            font-weight: bold;
+            color: white;
+            margin-bottom: 5px;
+        }
+
+        .admin-handle {
+            color: #94a3b8;
+            font-style: italic;
+        }
+
+        .info-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+
+        .info-card {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 15px;
+            padding: 25px;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .staff-card {
+            background: linear-gradient(135deg, rgba(139, 69, 19, 0.2), rgba(160, 82, 45, 0.1));
+            border: 1px solid rgba(139, 69, 19, 0.3);
+        }
+
+        .services-card {
+            background: linear-gradient(135deg, rgba(59, 130, 246, 0.2), rgba(37, 99, 235, 0.1));
+            border: 1px solid rgba(59, 130, 246, 0.3);
+        }
+
+        .info-card:hover {
+            transform: translateY(-8px) scale(1.02);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.3);
+        }
+
+        .staff-card:hover {
+            background: linear-gradient(135deg, rgba(139, 69, 19, 0.3), rgba(160, 82, 45, 0.2));
+        }
+
+        .services-card:hover {
+            background: linear-gradient(135deg, rgba(59, 130, 246, 0.3), rgba(37, 99, 235, 0.2));
+        }
+
+        .info-title {
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .vip-offer {
+            background: linear-gradient(135deg, rgba(251, 191, 36, 0.2), rgba(245, 158, 11, 0.1));
+            border: 1px solid rgba(251, 191, 36, 0.4);
+            border-radius: 15px;
+            padding: 25px;
+            margin-bottom: 30px;
+            text-align: center;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .vip-offer:hover {
+            background: linear-gradient(135deg, rgba(251, 191, 36, 0.3), rgba(245, 158, 11, 0.2));
+            transform: translateY(-5px) scale(1.02);
+        }
+
+        .vip-title {
+            font-size: 2rem;
+            margin-bottom: 15px;
+            color: #fbbf24;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+
+        .price {
+            font-weight: bold;
+            color: #fbbf24;
+        }
+
+        .footer {
+            text-align: center;
+            padding: 20px;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 15px;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            margin-top: 30px;
+        }
+
+        .footer-text {
+            margin-bottom: 10px;
+            opacity: 0.8;
+        }
+
+        .footer-link {
+            color: #3b82f6;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .footer-link:hover {
+            color: #60a5fa;
+        }
+
+        .copyright {
             opacity: 0.6;
+            font-size: 0.9rem;
+            margin-top: 15px;
         }
 
-        @keyframes float-particle {
-            0% {
-                transform: translateY(100vh) rotate(0deg);
-                opacity: 0;
+        /* Animations de click */
+        @keyframes clickPulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(0.95); }
+            100% { transform: scale(1); }
+        }
+
+        .click-animation {
+            animation: clickPulse 0.3s ease;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .main-title {
+                font-size: 2rem;
             }
-            10% {
-                opacity: 0.6;
+            
+            .logo {
+                font-size: 2rem;
             }
-            90% {
-                opacity: 0.6;
+            
+            .admins-grid {
+                grid-template-columns: 1fr;
             }
-            100% {
-                transform: translateY(-100vh) rotate(360deg);
-                opacity: 0;
+            
+            .info-grid {
+                grid-template-columns: 1fr;
             }
         }
     </style>
 </head>
 <body>
-    <div class="particles" id="particles"></div>
+    <!-- Étoiles animées -->
+    <div class="stars" id="stars"></div>
     
+    <!-- Particules flottantes -->
+    <div class="floating-particles" id="particles"></div>
+
     <div class="container">
-        <header class="header">
-            <h1 class="logo">MasterGen</h1>
-            <p class="subtitle">Générateur de Comptes Premium</p>
-        </header>
-
-        <main class="main-content">
-            <button class="generate-btn" id="generateBtn">Générer un Compte</button>
-        </main>
-    </div>
-
-    <button class="support-btn" id="supportBtn">Support</button>
-
-    <!-- Modal Génération de Compte -->
-    <div id="accountModal" class="modal">
-        <div class="modal-content">
-            <h2>🏆 MasterGen #TOP 1 FR</h2>
-            <p>Mastergen Le meilleur Génerateur de toute La France est entrain de tout peter pour son ComeBack Les comptes son free alors profite en et rejoins nous ! TOP 1 FR MONDIAL</p>
-            <a href="https://discord.gg/mastergen" target="_blank" class="discord-link">
-                👾 Rejoindre le Discord
-            </a>
-            <br>
-            <button class="close-btn" onclick="closeAccountModal()">Fermer</button>
+        <div class="header">
+            <div class="logo">MASTERGEN</div>
         </div>
-    </div>
 
-    <!-- Modal Support -->
-    <div id="supportModal" class="modal">
-        <div class="modal-content support-modal-content">
-            <h2>💬 Support</h2>
-            <div class="admin-list">
-                <h3>ADMIN DU SERVEUR</h3>
-                <div class="admin-item">👑 aly, traxxdc, crimuuhq, youust, iroukaa, amine.lbs ...</div>
-                <div class="admin-item">⚡ nogas</div>
-                <div class="admin-item">🌟 Comet</div>
+        <h1 class="main-title">
+            MASTERGEN - Comptes Premium Garanties <span class="sparkle">✨</span>
+        </h1>
+
+        <p class="description">
+            Depuis longtemps, Mastergen a été créer pour ses clients, son premier but était 
+            d'offrir des comptes à tous ceux qui veulent. Maintenant avec sa communauté 
+            grandissante de jour en jour, Mastergen est le lieu parfait pour tous types de 
+            comptes !
+        </p>
+
+        <div class="discord-section" onclick="animateClick(this)">
+            <div class="discord-title">
+                🚀 Rejoins notre Discord
             </div>
-            <br>
-            <button class="close-btn" onclick="closeSupportModal()">Fermer</button>
+            <p>Le lien est actualisé chaque jour pour que tu puisses toujours accéder à notre communauté !</p>
+            <div style="margin: 15px 0;">
+                <span class="discord-link">https://discord.gg/mastergen</span>
+                <button class="copy-btn" onclick="copyToClipboard('https://discord.gg/mastergen')">Copier</button>
+            </div>
         </div>
-    </div>
 
-    <!-- Notification -->
-    <div id="notification" class="notification">
-        ✅ Vous avez fermé la page avec succès
+        <div class="reminder" onclick="animateClick(this)">
+            <div class="star-icon">⭐</div>
+            <div>
+                <strong>N'oublie pas !</strong><br>
+                Pense à ajouter ce site en signet web pour ne jamais perdre l'accès à Mastergen.
+            </div>
+        </div>
+
+        <div class="admins-section">
+            <div class="section-title">
+                ✏️ All Admins
+            </div>
+            <div class="admins-grid">
+                <div class="admin-card" onclick="animateClick(this)">
+                    <div class="admin-name">@decal</div>
+                    <div class="admin-handle">nqfd</div>
+                </div>
+                <div class="admin-card" onclick="animateClick(this)">
+                    <div class="admin-name">@Comet</div>
+                    <div class="admin-handle">harcelements</div>
+                </div>
+                <div class="admin-card" onclick="animateClick(this)">
+                    <div class="admin-name">@! Kaito</div>
+                    <div class="admin-handle">1nt3lx</div>
+                </div>
+                <div class="admin-card" onclick="animateClick(this)">
+                    <div class="admin-name">@Jay</div>
+                    <div class="admin-handle">nqfd</div>
+                </div>
+                <div class="admin-card" onclick="animateClick(this)">
+                    <div class="admin-name">@Blue</div>
+                    <div class="admin-handle">imbat1ble</div>
+                </div>
+                <div class="admin-card" onclick="animateClick(this)">
+                    <div class="admin-name">@Nyz0x</div>
+                    <div class="admin-handle">h2jd</div>
+                </div>
+                <div class="admin-card" onclick="animateClick(this)">
+                    <div class="admin-name">@méthamphétamine</div>
+                    <div class="admin-handle">feelslikefading</div>
+                </div>
+                <div class="admin-card" onclick="animateClick(this)">
+                    <div class="admin-name">@!" ◊ Célian ◊</div>
+                    <div class="admin-handle">celianb</div>
+                </div>
+                <div class="admin-card" onclick="animateClick(this)">
+                    <div class="admin-name">@lrouka</div>
+                    <div class="admin-handle">lroukadsc</div>
+                </div>
+                <div class="admin-card" onclick="animateClick(this)">
+                    <div class="admin-name">@amine.lbs 😤</div>
+                    <div class="admin-handle">amine.lbs</div>
+                </div>
+                <div class="admin-card" onclick="animateClick(this)">
+                    <div class="admin-name">@Soow</div>
+                    <div class="admin-handle">cresoo2retour</div>
+                </div>
+                <div class="admin-card" onclick="animateClick(this)">
+                    <div class="admin-name">@k'</div>
+                    <div class="admin-handle">razeinstalock</div>
+                </div>
+                <div class="admin-card" onclick="animateClick(this)">
+                    <div class="admin-name">@wwrgg</div>
+                    <div class="admin-handle">traxxdc</div>
+                </div>
+                <div class="admin-card" onclick="animateClick(this)">
+                    <div class="admin-name">@komaxa.</div>
+                    <div class="admin-handle">komaxa.</div>
+                </div>
+                <div class="admin-card" onclick="animateClick(this)">
+                    <div class="admin-name">@leavebynova</div>
+                    <div class="admin-handle">lostinmidnightmelody</div>
+                </div>
+                <div class="admin-card" onclick="animateClick(this)">
+                    <div class="admin-name">@Nogas rate</div>
+                    <div class="admin-handle">nogasrate</div>
+                </div>
+                <div class="admin-card" onclick="animateClick(this)">
+                    <div class="admin-name">@h4 777</div>
+                    <div class="admin-handle">justice2lombre</div>
+                </div>
+                <div class="admin-card" onclick="animateClick(this)">
+                    <div class="admin-name">@youu$t</div>
+                    <div class="admin-handle">youu$t.</div>
+                </div>
+                <div class="admin-card" onclick="animateClick(this)">
+                    <div class="admin-name">@Gamegenk</div>
+                    <div class="admin-handle">gamegenk.py</div>
+                </div>
+                <div class="admin-card" onclick="animateClick(this)">
+                    <div class="admin-name">@booskaP</div>
+                    <div class="admin-handle">userdeleted_62820</div>
+                </div>
+                <div class="admin-card" onclick="animateClick(this)">
+                    <div class="admin-name">@Crimuhq rate X4</div>
+                    <div class="admin-handle">povd</div>
+                </div>
+                <div class="admin-card" onclick="animateClick(this)">
+                    <div class="admin-name">@Aly</div>
+                    <div class="admin-handle">aly139dcc</div>
+                </div>
+                <div class="admin-card" onclick="animateClick(this)">
+                    <div class="admin-name">@crimuhq</div>
+                    <div class="admin-handle">csgg</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="info-grid">
+            <div class="info-card staff-card" onclick="animateClick(this)">
+                <div class="info-title">
+                    👥 Staff
+                </div>
+                <p>Mastergen possède un staff capable de vous répondre en très peu de temps !</p>
+            </div>
+            <div class="info-card services-card" onclick="animateClick(this)">
+                <div class="info-title">
+                    🚀 Services
+                </div>
+                <p>De nombreux giveaway sont lancées chaque jour et +15 services disponibles.</p>
+            </div>
+        </div>
+
+        <div class="vip-offer" onclick="animateClick(this)">
+            <div class="vip-title">
+                💎 Offre VIP
+            </div>
+            <p>Nouveau client ? Le VIP est à seulement <span class="price">3,5€</span>.</p>
+            <p>Ancien membre fidèle ? Profite du tarif spécial à <span class="price">1,5€</span> !</p>
+        </div>
+
+        <div class="footer">
+            <p class="footer-text">
+                Ce site a été conçu et est hébergé par <strong>Célian</strong>. Soutenez le projet et rejoignez notre serveur Discord 
+                pour le support ou pour profiter d'hébergement à bas prix : 
+                <a href="#" class="footer-link" onclick="animateClick(this)">discord.gg/bfyWBmB5TU</a>
+            </p>
+            <div class="copyright">
+                © 2025 – Mastergen – Tous droits réservés.
+            </div>
+        </div>
     </div>
 
     <script>
-        // Création des particules flottantes
+        // Génération des étoiles
+        function createStars() {
+            const starsContainer = document.getElementById('stars');
+            const numStars = 150;
+            
+            for (let i = 0; i < numStars; i++) {
+                const star = document.createElement('div');
+                star.className = 'star';
+                
+                // Couleurs aléatoires pour les étoiles
+                const colors = ['', 'purple', 'blue', 'cyan'];
+                const randomColor = colors[Math.floor(Math.random() * colors.length)];
+                if (randomColor) star.classList.add(randomColor);
+                
+                // Position aléatoire
+                star.style.left = Math.random() * 100 + '%';
+                star.style.top = Math.random() * 100 + '%';
+                
+                // Délai d'animation aléatoire
+                star.style.animationDelay = Math.random() * 3 + 's';
+                
+                starsContainer.appendChild(star);
+            }
+        }
+
+        // Génération des particules flottantes
         function createParticles() {
             const particlesContainer = document.getElementById('particles');
+            const numParticles = 20;
             
-            setInterval(() => {
+            for (let i = 0; i < numParticles; i++) {
                 const particle = document.createElement('div');
                 particle.className = 'particle';
+                
+                // Position aléatoire
                 particle.style.left = Math.random() * 100 + '%';
-                particle.style.width = particle.style.height = Math.random() * 8 + 3 + 'px';
-                particle.style.animationDuration = Math.random() * 3 + 3 + 's';
-                particle.style.animationDelay = Math.random() * 2 + 's';
+                particle.style.top = Math.random() * 100 + '%';
+                
+                // Délai d'animation aléatoire
+                particle.style.animationDelay = Math.random() * 6 + 's';
+                particle.style.animationDuration = (Math.random() * 4 + 4) + 's';
                 
                 particlesContainer.appendChild(particle);
-                
-                setTimeout(() => {
-                    particle.remove();
-                }, 6000);
+            }
+        }
+
+        // Animation de clic
+        function animateClick(element) {
+            element.classList.add('click-animation');
+            
+            // Créer des particules d'effet au clic
+            createClickEffect(element);
+            
+            setTimeout(() => {
+                element.classList.remove('click-animation');
             }, 300);
         }
 
-        // Gestion du bouton "Générer un Compte"
-        document.getElementById('generateBtn').addEventListener('click', function() {
-            document.getElementById('accountModal').style.display = 'block';
-        });
-
-        // Gestion du bouton "Support"
-        document.getElementById('supportBtn').addEventListener('click', function() {
-            document.getElementById('supportModal').style.display = 'block';
-        });
-
-        // Fermer le modal de génération de compte
-        function closeAccountModal() {
-            document.getElementById('accountModal').style.display = 'none';
-            showNotification();
+        // Effet de particules au clic
+        function createClickEffect(element) {
+            const rect = element.getBoundingClientRect();
+            const centerX = rect.left + rect.width / 2;
+            const centerY = rect.top + rect.height / 2;
+            
+            for (let i = 0; i < 6; i++) {
+                const particle = document.createElement('div');
+                particle.style.position = 'fixed';
+                particle.style.left = centerX + 'px';
+                particle.style.top = centerY + 'px';
+                particle.style.width = '4px';
+                particle.style.height = '4px';
+                particle.style.borderRadius = '50%';
+                particle.style.background = '#a855f7';
+                particle.style.pointerEvents = 'none';
+                particle.style.zIndex = '1000';
+                
+                const angle = (i * 60) * Math.PI / 180;
+                const velocity = 50;
+                const vx = Math.cos(angle) * velocity;
+                const vy = Math.sin(angle) * velocity;
+                
+                document.body.appendChild(particle);
+                
+                let opacity = 1;
+                let x = 0;
+                let y = 0;
+                
+                const animate = () => {
+                    x += vx * 0.02;
+                    y += vy * 0.02;
+                    opacity -= 0.02;
+                    
+                    particle.style.transform = `translate(${x}px, ${y}px)`;
+                    particle.style.opacity = opacity;
+                    
+                    if (opacity > 0) {
+                        requestAnimationFrame(animate);
+                    } else {
+                        document.body.removeChild(particle);
+                    }
+                };
+                
+                requestAnimationFrame(animate);
+            }
         }
 
-        // Fermer le modal de support
-        function closeSupportModal() {
-            document.getElementById('supportModal').style.display = 'none';
-            showNotification();
+        // Fonction pour copier dans le presse-papier
+        function copyToClipboard(text) {
+            navigator.clipboard.writeText(text).then(() => {
+                // Animation de feedback
+                const button = event.target;
+                const originalText = button.textContent;
+                button.textContent = 'Copié !';
+                button.style.background = '#10b981';
+                
+                setTimeout(() => {
+                    button.textContent = originalText;
+                    button.style.background = '#5865f2';
+                }, 1500);
+            });
         }
 
-        // Afficher la notification
-        function showNotification() {
-            const notification = document.getElementById('notification');
-            notification.classList.add('show');
+        // Animation de scroll parallaxe pour les étoiles
+        window.addEventListener('scroll', () => {
+            const scrolled = window.pageYOffset;
+            const stars = document.querySelectorAll('.star');
             
-            setTimeout(() => {
-                notification.classList.remove('show');
-            }, 3000);
-        }
-
-        // Fermer les modals en cliquant à l'extérieur
-        window.addEventListener('click', function(event) {
-            const accountModal = document.getElementById('accountModal');
-            const supportModal = document.getElementById('supportModal');
-            
-            if (event.target === accountModal) {
-                closeAccountModal();
-            }
-            if (event.target === supportModal) {
-                closeSupportModal();
-            }
+            stars.forEach((star, index) => {
+                const speed = 0.5 + (index % 3) * 0.2;
+                star.style.transform = `translateY(${scrolled * speed}px)`;
+            });
         });
 
-        // Démarrer la création de particules
-        createParticles();
-
-        // Effet de cursor personnalisé
-        document.addEventListener('mousemove', function(e) {
-            const cursor = document.createElement('div');
-            cursor.style.cssText = `
-                position: fixed;
-                top: ${e.clientY}px;
-                left: ${e.clientX}px;
-                width: 10px;
-                height: 10px;
-                background: radial-gradient(circle, rgba(255,255,255,0.8), transparent);
-                border-radius: 50%;
-                pointer-events: none;
-                z-index: 9999;
-                animation: cursorFade 0.5s ease-out forwards;
-            `;
+        // Initialisation
+        document.addEventListener('DOMContentLoaded', () => {
+            createStars();
+            createParticles();
             
-            document.body.appendChild(cursor);
+            // Animation d'entrée pour les éléments
+            const elements = document.querySelectorAll('.admin-card, .info-card, .discord-section, .vip-offer');
             
-            setTimeout(() => {
-                cursor.remove();
-            }, 500);
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.style.opacity = '1';
+                        entry.target.style.transform = 'translateY(0)';
+                    }
+                });
+            });
+            
+            elements.forEach((el, index) => {
+                el.style.opacity = '0';
+                el.style.transform = 'translateY(50px)';
+                el.style.transition = `opacity 0.6s ease ${index * 0.1}s, transform 0.6s ease ${index * 0.1}s`;
+                observer.observe(el);
+            });
         });
 
-        // Animation du cursor
-        const style = document.createElement('style');
-        style.textContent = `
-            @keyframes cursorFade {
-                0% { opacity: 1; transform: scale(1); }
-                100% { opacity: 0; transform: scale(0); }
+        // Régenération périodique des particules
+        setInterval(() => {
+            const particles = document.querySelectorAll('.particle');
+            if (particles.length > 0) {
+                const randomParticle = particles[Math.floor(Math.random() * particles.length)];
+                randomParticle.style.left = Math.random() * 100 + '%';
+                randomParticle.style.top = Math.random() * 100 + '%';
             }
-        `;
-        document.head.appendChild(style);
+        }, 3000);
     </script>
 </body>
 </html>
